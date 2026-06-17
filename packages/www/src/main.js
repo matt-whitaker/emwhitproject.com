@@ -3,10 +3,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ── Nav color swap over light sections ────────────────
+ScrollTrigger.create({
+  trigger: '#about',
+  start: 'top 20px',
+  end: 'bottom 20px',
+  toggleClass: { targets: 'nav', className: 'nav-dark' },
+});
+
 // ── About ─────────────────────────────────────────────
 gsap.from('.about-img', {
   scrollTrigger: {
-    trigger: '.about-section',
+    trigger: '#about',
     start: 'top 80%',
   },
   x: -80,
@@ -17,7 +25,7 @@ gsap.from('.about-img', {
 
 gsap.from('.about-text', {
   scrollTrigger: {
-    trigger: '.about-section',
+    trigger: '#about',
     start: 'top 75%',
   },
   opacity: 0,
@@ -29,7 +37,7 @@ gsap.from('.about-text', {
 // ── News ──────────────────────────────────────────────
 gsap.from('.news-item', {
   scrollTrigger: {
-    trigger: '.news-section',
+    trigger: '#news',
     start: 'top 80%',
   },
   opacity: 0,
@@ -42,7 +50,7 @@ gsap.from('.news-item', {
 // ── Discography ───────────────────────────────────────
 gsap.from('.disco-item', {
   scrollTrigger: {
-    trigger: '.discography-section',
+    trigger: '#discography',
     start: 'top 80%',
   },
   opacity: 0,

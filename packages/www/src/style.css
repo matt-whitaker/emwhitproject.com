@@ -7,159 +7,42 @@
   font-style: normal;
 }
 
-body {
-  background-image: url("/green-dust-and-scratches.png");
-  background-color: #000;
-  font-size: 10px;
+/*
+  Single fluid type root. All rem-based Tailwind text utilities
+  scale automatically with this one value.
+  375px → 12px, 768px → ~15px, 1024px+ → 18px
+*/
+html {
+  font-size: clamp(12px, 8px + 1.1vw, 18px);
 }
 
-@media (min-width: 480px) {
-  body { font-size: 12px; }
+/* Nav icon color — transitions smoothly when over light sections */
+.nav-icon {
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  body { font-size: 14px; }
-}
-
-@media (min-width: 1024px) {
-  body { font-size: 16px; }
-}
-
-@media (min-width: 1280px) {
-  body { font-size: 18px; }
-}
-
-@media (min-width: 1536px) {
-  body { font-size: 20px; }
-}
-
-.text-title {
-  font-size: var(--font-size-6xl);
-}
-
-/* ── Section shared ─────────────────────────────────── */
-.section-heading {
-  font-size: 3em;
-  margin-bottom: 0.5em;
-}
-
-/* ── About ──────────────────────────────────────────── */
-.about-section {
-  display: flex;
-  align-items: center;
-  gap: 4em;
-  padding: 6em 8vw;
-  background-color: #fff;
+nav.nav-dark .nav-icon {
   color: #111;
 }
 
-.about-img {
-  width: 40%;
-  max-width: 480px;
-  flex-shrink: 0;
-  object-fit: cover;
-  border-radius: 4px;
+/* Bespoke hero title — more aggressive ramp than the global scale */
+.text-hero {
+  font-size: clamp(28px, -20px + 10vw, 120px);
 }
 
-.about-text {
-  flex: 1;
-  font-size: 1.1em;
-  line-height: 1.7;
-}
-
-@media (max-width: 767px) {
-  .about-section {
-    flex-direction: column;
+/* Portrait mobile: stack each word on its own line, bump size */
+@media (max-width: 540px) and (orientation: portrait) {
+  .text-hero {
+    font-size: clamp(56px, 14vw, 80px);
   }
-  .about-img {
-    width: 100%;
-    max-width: 100%;
+  .hero-word {
+    display: block;
   }
 }
 
-/* ── News ───────────────────────────────────────────── */
-.news-section {
-  padding: 6em 8vw;
-  color: #fff;
-}
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-  gap: 2.5em;
-}
-
-.news-item {
-  border-top: 2px solid #c92525;
-  padding-top: 1em;
-}
-
-.news-date {
-  display: block;
-  font-size: 0.8em;
-  opacity: 0.6;
-  margin-bottom: 0.4em;
-}
-
-.news-title {
-  font-size: 1.2em;
-  font-weight: 700;
-  margin-bottom: 0.5em;
-}
-
-.news-body {
-  font-size: 0.95em;
-  line-height: 1.65;
-  opacity: 0.85;
-}
-
-/* ── Discography ────────────────────────────────────── */
-.discography-section {
-  padding: 6em 8vw;
-  color: #fff;
-}
-
-.disco-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3em;
-}
-
-.disco-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 2em;
-}
-
-.disco-art {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.disco-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4em;
-}
-
-.disco-title {
-  font-size: 1.8em;
-}
-
-.disco-type {
-  font-size: 0.85em;
-  opacity: 0.6;
-}
-
-.disco-desc {
-  margin-top: 0.5em;
-  font-size: 0.95em;
-  line-height: 1.65;
-  max-width: 40em;
-  opacity: 0.85;
+body {
+  background-image: url("/green-dust-and-scratches.png");
+  background-color: #000;
 }
 
 @theme {
@@ -167,16 +50,7 @@ body {
   --spacing-vw: 100vw;
   --spacing-vh: 100vh;
   --color-red: #c92525;
-
-  --font-size-xs:   clamp(0.75rem,  0.7rem + 0.25vw,  0.875rem);
-  --font-size-sm:   clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
-  --font-size-base: clamp(1rem,     0.925rem + 0.375vw, 1.125rem);
-  --font-size-lg:   clamp(1.125rem, 1rem + 0.625vw,    1.375rem);
-  --font-size-xl:   clamp(1.25rem,  1.05rem + 1vw,     1.75rem);
-  --font-size-2xl:  clamp(1.5rem,   1.2rem + 1.5vw,    2.25rem);
-  --font-size-3xl:  clamp(1.875rem, 1.4rem + 2.375vw,  3rem);
-  --font-size-4xl:  clamp(2.25rem,  1.6rem + 3.25vw,   4rem);
-  --font-size-5xl:  clamp(2.75rem,  1.8rem + 4.75vw,   5.5rem);
-  --font-size-6xl: clamp(5.5rem,  2.2rem + 6.5vw,  7rem);
-  --font-size-7xl: clamp(7rem, 2.5rem + 8.75vw, 9.5rem);
+  --color-near-black: #111;
+  --leading-body: 1.65;
+  --leading-loose: 1.7;
 }

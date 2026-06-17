@@ -4,26 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script src="<%- config.scripts.fontawesome %>" crossorigin="anonymous"></script>
+    <link rel="preload" as="image" href="<%- config.images.about %>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Emwhit Project</title>
   </head>
   <body>
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-6 px-8 py-4">
+      <% config.socials.forEach(({ label, icon, url }) => { %>
+      <a href="<%- url %>" aria-label="<%- label %>" class="nav-icon text-white opacity-70 hover:opacity-100 text-2xl">
+        <i class="fa-brands <%- icon %>"></i>
+      </a>
+      <% }) %>
+    </nav>
+
     <div id="app">
 
       <!-- Hero -->
       <section id="hero" class="flex justify-center items-center w-vw h-vh">
-        <h1 class="text-red font-stardos text-title">The Emwhit Project</h1>
+        <h1 class="font-stardos text-red text-hero text-center">
+          <span class="hero-word">The</span>
+          <span class="hero-word"> Emwhit</span>
+          <span class="hero-word"> Project</span>
+        </h1>
       </section>
 
       <!-- About -->
-      <section id="about" class="about-section">
+      <section id="about" class="flex max-lg:flex-col items-center gap-16 py-24 px-[8vw] bg-white text-near-black">
         <img
-          class="about-img"
-          src="https://placekittens.com/800/900"
+          class="about-img w-3/5 max-lg:w-full shrink-0 object-cover rounded"
+          src="<%- config.images.about %>"
           alt="About photo"
         />
-        <div class="about-text">
-          <h2 class="section-heading font-stardos text-red">About</h2>
+        <div class="about-text flex-1 text-lg leading-loose">
+          <h2 class="font-stardos text-red text-4xl mb-2">About</h2>
           <p>
             The Emwhit Project is an independent music endeavor rooted in the
             intersection of atmosphere, melody, and raw experimentation. Born out
@@ -38,60 +52,42 @@
       </section>
 
       <!-- News -->
-      <section id="news" class="news-section">
-        <h2 class="section-heading font-stardos text-red">News</h2>
-        <div class="news-grid">
-          <article class="news-item">
-            <time class="news-date">June 2, 2026</time>
-            <h3 class="news-title">New Single "Pale Signal" Out Now</h3>
-            <p class="news-body">
-              The latest single is available on all streaming platforms. "Pale
-              Signal" marks a new direction — leaner, darker, and built around a
-              central guitar motif that refuses to let go. Stream or download
-              wherever you get your music.
-            </p>
+      <section id="news" class="py-24 px-[8vw] text-white">
+        <h2 class="font-stardos text-red text-4xl mb-2">News</h2>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(18em,1fr))] gap-10">
+
+          <% news.forEach(({ title, date, body }) => { %>
+          <article class="news-item border-t-2 border-red pt-4">
+            <time class="block text-xs opacity-60 mb-1.5">
+              <%= date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>
+            </time>
+            <h3 class="text-xl font-bold mb-2"><%- title %></h3>
+            <p class="text-base leading-body opacity-85"><%- body %></p>
           </article>
-          <article class="news-item">
-            <time class="news-date">April 14, 2026</time>
-            <h3 class="news-title">Summer Tour Dates Announced</h3>
-            <p class="news-body">
-              Dates are locked in for a run of summer shows across the Midwest
-              and East Coast. Expect an expanded live set, new material, and a
-              few surprises. Full schedule and ticket links coming soon — stay
-              tuned.
-            </p>
-          </article>
-          <article class="news-item">
-            <time class="news-date">February 28, 2026</time>
-            <h3 class="news-title">Recording Wrapped on Debut LP</h3>
-            <p class="news-body">
-              After eight months in the studio, tracking on the debut full-length
-              is officially complete. Mixing begins next month. No release date
-              yet, but it's closer than it's ever been.
-            </p>
-          </article>
+          <% }) %>
         </div>
       </section>
 
       <!-- Discography -->
-      <section id="discography" class="discography-section">
-        <h2 class="section-heading font-stardos text-red">Discography</h2>
-        <div class="disco-grid">
-          <div class="disco-item">
+      <section id="discography" class="py-24 px-[8vw] text-white">
+        <h2 class="font-stardos text-red text-4xl mb-2">Discography</h2>
+        <div class="flex flex-wrap gap-12">
+
+          <% discography.forEach(({ title, type, date, cover, description }) => { %>
+          <div class="disco-item flex items-start gap-8">
             <img
-              class="disco-art"
-              src="https://placekittens.com/400/400"
-              alt="Pale Signal EP cover"
+              class="disco-art w-48 h-48 object-cover rounded shrink-0"
+              src="<%- cover %>"
+              alt="<%- title %> cover"
             />
-            <div class="disco-meta">
-              <h3 class="disco-title font-stardos">Pale Signal</h3>
-              <span class="disco-type">EP &mdash; 2026</span>
-              <p class="disco-desc">
-                Four tracks recorded live to tape over a single weekend.
-                Somewhere between post-rock and something harder to name.
-              </p>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="font-stardos text-2xl"><%- title %></h3>
+              <span class="text-sm opacity-60"><%- type %> &mdash; <%= date.getFullYear() %></span>
+              <p class="mt-2 text-base leading-body max-w-2xl opacity-85"><%- description %></p>
             </div>
           </div>
+          <% }) %>
+
         </div>
       </section>
 

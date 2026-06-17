@@ -1,0 +1,15 @@
+{
+  "socials": [
+    { "label": "Instagram", "icon": "fa-instagram", "url": "https://www.instagram.com/emwhitproject" },
+    { "label": "TikTok",    "icon": "fa-tiktok",    "url": "https://www.tiktok.com/@emwhitproject" },
+    { "label": "X",         "icon": "fa-x-twitter", "url": "https://x.com/EmwhitProject" },
+    { "label":  "Youtube",  "icon": "fa-youtube",   "url": "https://www.youtube.com/@EmwhitProject" },
+    { "label": "Bandcamp",  "icon": "fa-bandcamp",  "url": "https://emwhitproject.bandcamp.com" }
+  ],
+  "scripts": {
+    "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
+  },
+  "images": {
+    "about": "https://placekittens.com/960/540"
+  }
+}
