@@ -22,7 +22,7 @@ html {
 }
 
 nav.nav-dark .nav-icon {
-  color: #111;
+  color: var(--color-near-black);
 }
 
 /* Bespoke hero title — more aggressive ramp than the global scale */

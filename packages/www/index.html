@@ -53,11 +53,11 @@
 
       <!-- News -->
       <section id="news" class="py-24 px-[8vw] text-white">
-        <h2 class="font-stardos text-red text-4xl mb-2">News</h2>
+        <h2 class="font-stardos text-red text-4xl mb-3">News</h2>
         <div class="grid grid-cols-[repeat(auto-fit,minmax(18em,1fr))] gap-10">
 
           <% news.forEach(({ title, date, body }) => { %>
-          <article class="news-item border-t-2 border-red pt-4">
+          <article class="news-item border-t-2 border-red pt-4 max-w-[33%]">
             <time class="block text-xs opacity-60 mb-1.5">
               <%= date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>
             </time>
@@ -70,7 +70,7 @@
 
       <!-- Discography -->
       <section id="discography" class="py-24 px-[8vw] text-white">
-        <h2 class="font-stardos text-red text-4xl mb-2">Discography</h2>
+        <h2 class="font-stardos text-red text-4xl mb-3">Discography</h2>
         <div class="flex flex-wrap gap-12">
 
           <% discography.forEach(({ title, type, date, cover, description }) => { %>
@@ -92,6 +92,21 @@
       </section>
 
     </div>
+
+    <footer class="px-[8vw] py-16 border-t border-white/10 flex flex-col gap-8 bg-white text-near-black">
+      <div class="flex justify-between items-start gap-8 max-sm:flex-col">
+        <span class="font-stardos text-red text-2xl">The Emwhit Project</span>
+        <div class="flex gap-6">
+          <% config.socials.forEach(({ label, icon, url }) => { %>
+          <a href="<%- url %>" aria-label="<%- label %>" class="text-near-black opacity-50 hover:opacity-100 transition-opacity text-xl">
+            <i class="fa-brands <%- icon %>"></i>
+          </a>
+          <% }) %>
+        </div>
+      </div>
+      <p class="text-xs text-near-black opacity-30">&copy; <%= new Date().getFullYear() %> The Emwhit Project. All rights reserved.</p>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
