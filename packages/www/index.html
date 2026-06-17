@@ -57,7 +57,7 @@
         <div class="grid grid-cols-[repeat(auto-fit,minmax(18em,1fr))] gap-10">
 
           <% news.forEach(({ title, date, body }) => { %>
-          <article class="news-item border-t-2 border-red pt-4 max-w-[33%]">
+          <article class="news-item border-t-2 border-red pt-4 ">
             <time class="block text-xs opacity-60 mb-1.5">
               <%= date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) %>
             </time>
@@ -93,18 +93,18 @@
 
     </div>
 
-    <footer class="px-[8vw] py-16 border-t border-white/10 flex flex-col gap-8 bg-white text-near-black">
+    <footer class="px-[8vw] py-16 border-t border-white/10 flex flex-col gap-8 bg-black text-white">
       <div class="flex justify-between items-start gap-8 max-sm:flex-col">
         <span class="font-stardos text-red text-2xl">The Emwhit Project</span>
         <div class="flex gap-6">
           <% config.socials.forEach(({ label, icon, url }) => { %>
-          <a href="<%- url %>" aria-label="<%- label %>" class="text-near-black opacity-50 hover:opacity-100 transition-opacity text-xl">
+          <a href="<%- url %>" aria-label="<%- label %>" class="text-white opacity-50 hover:opacity-100 transition-opacity text-xl">
             <i class="fa-brands <%- icon %>"></i>
           </a>
           <% }) %>
         </div>
       </div>
-      <p class="text-xs text-near-black opacity-30">&copy; <%= new Date().getFullYear() %> The Emwhit Project. All rights reserved.</p>
+      <p class="text-xs text-white opacity-30">&copy; <%= new Date().getFullYear() %> The Emwhit Project. All rights reserved.</p>
     </footer>
 
     <script type="module" src="/src/main.js"></script>
