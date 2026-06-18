@@ -13,6 +13,7 @@ function loadData(folder) {
       const entry = JSON.parse(readFileSync(resolve(dir, f), 'utf-8'));
       return { ...entry, date: new Date(entry.date + 'T00:00:00Z') };
     })
+    .filter(e => !e.exclude)
     .sort((a, b) => b.date - a.date);
 }
 

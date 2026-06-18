@@ -3,5 +3,6 @@
   "type": "Single",
   "date": "2026-07-22",
   "cover": "/albums/hit-the-road.jpg",
-  "description": "Have you ever just felt like you needed to get away from it all?"
+  "description": "Have you ever just felt like you needed to get away from it all?",
+  "exclude": true
 }
