@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import site from '../site.config.json';
+
+const { title = site.title, description = site.description } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: site.title,
+  url: site.url,
+  description: site.description,
+  sameAs: site.socials.map(s => s.url),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content={site.title} />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <script src={site.scripts.fontawesome} crossorigin="anonymous"></script>
+    <link rel="preload" as="image" href={site.images.seo} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={site.images.seo} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={site.images.seo} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-end items-center gap-6 px-8 py-4">
+      {site.socials.map(({ label, icon, url }) => (
+        <a href={url} aria-label={label} class="nav-icon text-white opacity-70 hover:opacity-100 text-2xl">
+          <i class={`fa-brands ${icon}`}></i>
+        </a>
+      ))}
+    </nav>
+
+    <slot />
+
+    <footer class="px-[8vw] py-16 border-t border-white/10 flex flex-col gap-8 bg-black text-white">
+      <div class="flex justify-between items-start gap-8 max-sm:flex-col">
+        <span class="font-stardos text-red text-2xl">{site.title}</span>
+        <div class="flex gap-6">
+          {site.socials.map(({ label, icon, url }) => (
+            <a href={url} aria-label={label} class="text-white opacity-50 hover:opacity-100 transition-opacity text-xl">
+              <i class={`fa-brands ${icon}`}></i>
+            </a>
+          ))}
+        </div>
+      </div>
+      <p class="text-xs text-white opacity-30">&copy; {new Date().getFullYear()} {site.title}. All rights reserved.</p>
+    </footer>
+
+    <script>
+      import '../scripts/animations.js';
+    </script>
+  </body>
+</html>
