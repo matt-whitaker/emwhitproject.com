@@ -7,7 +7,7 @@ on:
       - mainline
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: 22
 
 jobs:
   Build:
@@ -18,11 +18,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci
-      - run: npm run build -w packages/www
+      - run: npm run build -w packages/www2
       - uses: actions/upload-artifact@v4
         with:
           name: prod
-          path: packages/www/dist
+          path: packages/www2/dist
 
   Test:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
       environment: "prod"
       aws_default_region: "us-west-2"
       artifact_name: "prod"
-      artifact_path: "packages/www/dist"
+      artifact_path: "packages/www2/dist"
     secrets:
       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
