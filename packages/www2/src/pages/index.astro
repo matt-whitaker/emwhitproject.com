@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadData } from '../lib/data.js';
+import { getCollection, render } from 'astro:content';
 
 const discography = loadData(import.meta.glob('/src/data/discography/*.json', { eager: true }));
-const news = loadData(import.meta.glob('/src/data/news/*.json', { eager: true }));
+
+const news = await Promise.all(
+  (await getCollection('news'))
+    .sort((a, b) => b.data.date - a.data.date)
+    .map(async entry => ({ ...entry, ...(await render(entry)) }))
+);
 ---
 
 <Layout>
@@ -40,13 +46,17 @@ const news = loadData(import.meta.glob('/src/data/news/*.json', { eager: true })
     <section id="news" class="py-24 px-[8vw] text-white">
       <h2 class="font-stardos text-red text-4xl mb-3">News</h2>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(18em,1fr))] gap-10">
-        {news.map(({ title, date, body }) => (
+        {news.map(({ id, data, Content }) => (
           <article class="news-item border-t-2 border-red pt-4">
             <time class="block text-xs opacity-60 mb-1.5">
-              {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
+              {data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
             </time>
-            <h3 class="text-xl font-bold mb-2">{title}</h3>
-            <p class="text-base leading-body opacity-85">{body}</p>
+            <h3 class="text-xl font-bold mb-2">
+              <a href={`/news/${id}/`} class="hover:opacity-70 transition-opacity">{data.title}</a>
+            </h3>
+            <div class="prose prose-invert prose-sm max-w-none leading-body opacity-85">
+              <Content />
+            </div>
           </article>
         ))}
       </div>
@@ -70,4 +80,8 @@ const news = loadData(import.meta.glob('/src/data/news/*.json', { eager: true })
     </section>
 
   </div>
+
+  <script>
+    import '../scripts/animations.js';
+  </script>
 </Layout>
