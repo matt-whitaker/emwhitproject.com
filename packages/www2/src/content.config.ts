@@ -6,7 +6,20 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    preview: z.string().optional(),
   }),
 });
 
-export const collections = { news };
+const discography = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/discography' }),
+  schema: z.object({
+    title: z.string(),
+    type: z.string(),
+    date: z.coerce.date(),
+    cover: z.string(),
+    description: z.string(),
+    exclude: z.boolean().optional(),
+  }),
+});
+
+export const collections = { news, discography };

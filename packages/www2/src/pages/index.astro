@@ -1,15 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { loadData } from '../lib/data.js';
-import { getCollection, render } from 'astro:content';
+import { getExcerpt } from '../lib/excerpt.js';
+import { getCollection } from 'astro:content';
 
-const discography = loadData(import.meta.glob('/src/data/discography/*.json', { eager: true }));
+const discography = (await getCollection('discography', ({ data }) => !data.exclude))
+  .sort((a, b) => b.data.date - a.data.date);
 
-const news = await Promise.all(
-  (await getCollection('news'))
-    .sort((a, b) => b.data.date - a.data.date)
-    .map(async entry => ({ ...entry, ...(await render(entry)) }))
-);
+const news = (await getCollection('news'))
+  .sort((a, b) => b.data.date - a.data.date)
+  .map(entry => ({ ...entry, preview: entry.data.preview ?? getExcerpt(entry.body) }));
 ---
 
 <Layout>
@@ -46,7 +45,7 @@ const news = await Promise.all(
     <section id="news" class="py-24 px-[8vw] text-white">
       <h2 class="font-stardos text-red text-4xl mb-3">News</h2>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(18em,1fr))] gap-10">
-        {news.map(({ id, data, Content }) => (
+        {news.map(({ id, data, preview }) => (
           <article class="news-item border-t-2 border-red pt-4">
             <time class="block text-xs opacity-60 mb-1.5">
               {data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
@@ -54,9 +53,7 @@ const news = await Promise.all(
             <h3 class="text-xl font-bold mb-2">
               <a href={`/news/${id}/`} class="hover:opacity-70 transition-opacity">{data.title}</a>
             </h3>
-            <div class="prose prose-invert prose-sm max-w-none leading-body opacity-85">
-              <Content />
-            </div>
+            <p class="text-base leading-body opacity-85">{preview}</p>
           </article>
         ))}
       </div>
@@ -66,13 +63,13 @@ const news = await Promise.all(
     <section id="discography" class="py-24 px-[8vw] text-white hidden">
       <h2 class="font-stardos text-red text-4xl mb-3">Discography</h2>
       <div class="flex flex-wrap gap-12">
-        {discography.map(({ title, type, date, cover, description }) => (
+        {discography.map(({ data }) => (
           <div class="disco-item flex items-start gap-8">
-            <img class="disco-art w-48 h-48 object-cover rounded shrink-0" src={cover} alt={`${title} cover`} />
+            <img class="disco-art w-48 h-48 object-cover rounded shrink-0" src={data.cover} alt={`${data.title} cover`} />
             <div class="flex flex-col gap-1.5">
-              <h3 class="font-stardos text-2xl">{title}</h3>
-              <span class="text-sm opacity-60">{type} &mdash; {date.getFullYear()}</span>
-              <p class="mt-2 text-base leading-body max-w-2xl opacity-85">{description}</p>
+              <h3 class="font-stardos text-2xl">{data.title}</h3>
+              <span class="text-sm opacity-60">{data.type} &mdash; {data.date.getFullYear()}</span>
+              <p class="mt-2 text-base leading-body max-w-2xl opacity-85">{data.description}</p>
             </div>
           </div>
         ))}
