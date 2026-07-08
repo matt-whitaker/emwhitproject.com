@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "packages/www",
     "packages/www2"
   ]
 }
