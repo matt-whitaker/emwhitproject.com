@@ -4,4 +4,4 @@ Landing page for The Emwhit Project.
 
 ## Packages
 
-- "www": Astro.js package for the main site
+- [www](packages/www) - Astro.js package for the main site
