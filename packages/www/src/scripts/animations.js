@@ -3,6 +3,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Images (about photo, discography covers) finish loading after this script
+// runs, which shifts page height and leaves later triggers — like #listen,
+// the last section — pinned to stale (too-short) scroll coordinates. Force
+// a recalculation once everything has actually loaded.
+window.addEventListener('load', () => ScrollTrigger.refresh());
+
 // ── Nav color swap over light sections ────────────────
 ScrollTrigger.create({
   trigger: '#about',
@@ -56,5 +62,18 @@ gsap.from('.disco-item', {
   opacity: 0,
   y: 30,
   duration: 0.8,
+  ease: 'power2.out',
+});
+
+// ── Listen ────────────────────────────────────────────
+gsap.from('.listen-link', {
+  scrollTrigger: {
+    trigger: '#listen',
+    start: 'top 80%',
+  },
+  opacity: 0,
+  y: 20,
+  duration: 0.6,
+  stagger: 0.1,
   ease: 'power2.out',
 });

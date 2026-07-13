@@ -10,6 +10,11 @@
     { "label": "Threads",   "icon": "fa-threads",  "url": "https://www.threads.com/@emwhitproject" },
     { "label": "Youtube",   "icon": "fa-youtube",   "url": "https://www.youtube.com/@EmwhitProject" }
   ],
+  "platforms": [
+    { "label": "Spotify",     "icon": "fa-spotify",     "url": "#" },
+    { "label": "Apple Music", "icon": "fa-itunes-note", "url": "#" },
+    { "label": "Bandcamp",    "icon": "fa-bandcamp",    "url": "https://emwhitproject.bandcamp.com" }
+  ],
   "scripts": {
     "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
   },

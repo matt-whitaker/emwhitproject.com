@@ -61,7 +61,7 @@ const news = (await getCollection('news'))
     </section>
 
     <!-- Discography -->
-    <section id="discography" class="py-24 px-[8vw] text-white hidden">
+    <section id="discography" class="py-24 px-[8vw] text-white">
       <h2 class="font-stardos text-red text-4xl mb-3">Discography</h2>
       <div class="flex flex-wrap gap-12">
         {discography.map(({ data }) => (
@@ -73,6 +73,21 @@ const news = (await getCollection('news'))
               <p class="mt-2 text-base leading-body max-w-2xl opacity-85">{data.description}</p>
             </div>
           </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Listen -->
+    <section id="listen" class="py-24 px-[8vw] text-white text-center hidden">
+      <h2 class="font-stardos text-red text-4xl mb-6">Listen</h2>
+      <div class="flex justify-center flex-wrap gap-10">
+        {site.platforms.map(({ label, icon, url }) => (
+          <a href={url} aria-label={label} class="listen-link">
+            <span class="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+              <i class={`fa-brands ${icon} text-3xl`}></i>
+              <span class="text-xs">{label}</span>
+            </span>
+          </a>
         ))}
       </div>
     </section>
