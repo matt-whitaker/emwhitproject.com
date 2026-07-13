@@ -8,8 +8,7 @@
     { "label": "TikTok",    "icon": "fa-tiktok",    "url": "https://www.tiktok.com/@emwhitproject" },
     { "label": "X",         "icon": "fa-x-twitter", "url": "https://x.com/EmwhitProject" },
     { "label": "Threads",   "icon": "fa-threads",  "url": "https://www.threads.com/@emwhitproject" },
-    { "label": "Youtube",   "icon": "fa-youtube",   "url": "https://www.youtube.com/@EmwhitProject" },
-    { "label": "Bandcamp",  "icon": "fa-bandcamp",  "url": "https://emwhitproject.bandcamp.com" }
+    { "label": "Youtube",   "icon": "fa-youtube",   "url": "https://www.youtube.com/@EmwhitProject" }
   ],
   "scripts": {
     "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
