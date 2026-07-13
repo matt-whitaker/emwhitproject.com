@@ -15,7 +15,7 @@
     "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
   },
   "images": {
-    "about": "https://placekittens.com/960/540",
+    "about": "/artist.jpg",
     "seo": "/favicon/web-app-manifest-512x512.png"
   }
 }
