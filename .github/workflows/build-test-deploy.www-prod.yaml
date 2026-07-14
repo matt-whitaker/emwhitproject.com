@@ -21,7 +21,7 @@ jobs:
       - run: npm run build -w packages/www
       - uses: actions/upload-artifact@v4
         with:
-          name: prod
+          name: www-prod
           path: packages/www/dist
 
   Test:
@@ -34,13 +34,13 @@ jobs:
     needs: ["Build", "Test"]
     uses: matt-whitaker/aws-static-site/.github/workflows/deploy-static-site.yaml@v1.0.0
     with:
-      environment: "prod"
+      environment: "www-prod"
       aws_default_region: "us-west-2"
-      artifact_name: "prod"
+      artifact_name: "www-prod"
       artifact_path: "packages/www/dist"
     secrets:
       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      aws_s3_bucket: ${{ secrets.WWW_AWS_S3_BUCKET }}
-      aws_cloudfront_distribution_id: ${{ secrets.WWW_AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+      aws_s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
+      aws_cloudfront_distribution_id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
