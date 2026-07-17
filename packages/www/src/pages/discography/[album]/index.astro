@@ -1,0 +1,51 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import site from '../../../site.config.json';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const albums = await getCollection('albums', ({ data }) => !data.exclude);
+  return albums.map(album => ({
+    params: { album: album.id },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+const tracks = (await getCollection('tracks', ({ id }) => id.startsWith(`${album.id}/`)))
+  .sort((a, b) => a.data.track - b.data.track);
+---
+
+<Layout title={`${album.data.title} — ${site.title}`}>
+  <main class="pt-32 pb-24 px-[8vw] max-w-4xl mx-auto text-white">
+
+    <a href="/" class="inline-flex items-center gap-2 text-sm opacity-50 hover:opacity-100 transition-opacity mb-12">
+      <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+
+    <div class="flex max-md:flex-col items-start gap-10 mb-12">
+      <img class="w-48 h-48 object-cover rounded shrink-0" src={album.data.cover} alt={`${album.data.title} cover`} />
+      <div>
+        <span class="text-sm opacity-60">{album.data.type} &mdash; {album.data.date.getFullYear()}</span>
+        <h1 class="font-stardos text-red text-5xl leading-tight mt-2 mb-4">{album.data.title}</h1>
+        <p class="text-base leading-body opacity-85 max-w-2xl">{album.data.description}</p>
+      </div>
+    </div>
+
+    <ol class="flex flex-col divide-y divide-white/10 border-t border-b border-white/10">
+      {tracks.map(track => (
+        <li>
+          <a
+            href={`/discography/${album.id}/${track.id.split('/')[1]}/`}
+            class="flex items-center gap-4 py-4 hover:opacity-70 transition-opacity"
+          >
+            <span class="text-sm opacity-50 w-6 text-right">{track.data.track}</span>
+            <span class="text-lg flex-1">{track.data.title}</span>
+            <span class="text-sm opacity-50">{track.data.length}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+  </main>
+</Layout>
