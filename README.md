@@ -4,4 +4,18 @@ Landing page for The Emwhit Project.
 
 ## Packages
 
-- [www](packages/www) - Astro.js package for the main site
+| Package | Role |
+|---                            |--- |
+| [`www`](/packages/www)        | Website |
+
+## Stack
+
+### Website (emwhitproject.com)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Astro](https://astro.build/)
+
+## Claude Code
+
+[Claude Code](https://claude.com/claude-code) enabled with [`@claude` integration](.github/workflows/claude.yaml)
+
+See [Claude.md](/CLAUDE.md)
