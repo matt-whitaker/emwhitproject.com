@@ -4,7 +4,7 @@ import { getExcerpt } from '../lib/excerpt.js';
 import { getCollection } from 'astro:content';
 import site from '../site.config.json';
 
-const discography = (await getCollection('discography', ({ data }) => !data.exclude))
+const albums = (await getCollection('albums', ({ data }) => !data.exclude))
   .sort((a, b) => b.data.date - a.data.date);
 
 const news = (await getCollection('news'))
@@ -64,15 +64,15 @@ const news = (await getCollection('news'))
     <section id="discography" class="py-24 px-[8vw] text-white">
       <h2 class="font-stardos text-red text-4xl mb-3">Discography</h2>
       <div class="flex flex-wrap gap-12">
-        {discography.map(({ data }) => (
-          <div class="disco-item flex items-start gap-8">
+        {albums.map(({ id, data }) => (
+          <a href={`/discography/${id}/`} class="disco-item flex items-start gap-8 hover:opacity-80 transition-opacity">
             <img class="disco-art w-48 h-48 object-cover rounded shrink-0" src={data.cover} alt={`${data.title} cover`} />
             <div class="flex flex-col gap-1.5">
               <h3 class="font-stardos text-2xl">{data.title}</h3>
               <span class="text-sm opacity-60">{data.type} &mdash; {data.date.getFullYear()}</span>
               <p class="mt-2 text-base leading-body max-w-2xl opacity-85">{data.description}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </section>
