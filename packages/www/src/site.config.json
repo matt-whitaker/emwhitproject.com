@@ -10,9 +10,11 @@
     { "label": "Facebook",  "icon": "fa-facebook",  "url": "https://www.facebook.com/emwhitproject"  }
   ],
   "platforms": [
-    { "label": "Spotify",     "icon": "fa-spotify",     "url": "#" },
-    { "label": "Apple Music", "icon": "fa-itunes-note", "url": "#" },
-    { "label": "Bandcamp",    "icon": "fa-bandcamp",    "url": "https://emwhitproject.bandcamp.com" }
+    { "label": "Spotify",       "icon": "fa-spotify",       "url": "https://open.spotify.com/artist/6iMREmEHL2S6J5mDqNASCA" },
+    { "label": "Apple Music",   "icon": "fa-itunes-note",   "url": "https://music.apple.com/us/artist/the-emwhit-project/6779309728" },
+    { "label": "Amazon Music",  "icon": "fa-amazon",        "url": "https://music.amazon.com/artists/B0H4WRH6TW/the-emwhit-project"},
+    { "label": "Deezer",        "icon": "fa-deezer",        "url": "https://www.deezer.com/en/artist/396208691"},
+    { "label": "Youtube Music", "icon": "fa-youtube", "url": "https://music.youtube.com/@EmwhitProject"}
   ],
   "scripts": {
     "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
