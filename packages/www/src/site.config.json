@@ -18,6 +18,7 @@
     { "label": "Pandora",       "icon": "fa-pandora",       "url": "https://www.pandora.com/artist/the-emwhit-project/ARwK27V9bZn353J"},
     { "label": "Youtube Music", "icon": "fa-youtube",       "url": "https://music.youtube.com/@EmwhitProject"}
   ],
+  "linktree": { "label": "linktr.ee/emwhitproject", "url": "https://linktr.ee/emwhitproject"},
   "scripts": {
     "fontawesome": "https://kit.fontawesome.com/48be7dbb92.js"
   },

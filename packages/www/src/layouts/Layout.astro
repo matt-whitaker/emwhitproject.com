@@ -74,7 +74,10 @@ const jsonLd = {
           ))}
         </div>
       </div>
-      <p class="text-xs text-white opacity-30">&copy; {new Date().getFullYear()} {site.title}. All rights reserved.</p>
+      <div class="flex justify-between items-baseline gap-8 max-sm:flex-col text-xs text-white opacity-30">
+        <p>&copy; {new Date().getFullYear()} {site.title}. All rights reserved.</p>
+        <a href={site.linktree.url} class="hover:opacity-70 transition-opacity">{site.linktree.label}</a>
+      </div>
     </footer>
   </body>
 </html>
